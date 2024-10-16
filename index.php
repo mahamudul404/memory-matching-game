@@ -5,16 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Memory Matching Game</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
       background-color: gray;
-    }
-
-    h1 {
-      margin-top: 20px;
-      color: white;
     }
 
     #game-board {
@@ -24,28 +20,33 @@
       grid-gap: 10px;
       justify-content: center;
       margin: 20px auto;
-
     }
 
     .card {
       width: 100px;
       height: 100px;
-      background-color: white;
-      border: 1px solid black;
-      border-radius: 5px;
+      background-color: #3498db;
+      border-radius: 10px;
       display: flex;
-      justify-content: center;
       align-items: center;
-      font-size: 50px;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
       cursor: pointer;
     }
 
-    .card:hover {
-      background-color: lightgray;
+    .card.flipped {
+      background-color: #2ecc71;
     }
 
-    .card.flipped {
-      background-color: lightgray;
+    .card.matched {
+      background-color: #95a5a6;
+      pointer-events: none;
+    }
+
+    .game-stats {
+      margin-top: 20px;
+      font-size: 1.2rem;
     }
   </style>
 </head>
@@ -53,10 +54,31 @@
 <body>
   <h1>Memory Matching Game</h1>
   <div id="game-board"></div>
-  <div id="game-status">
+  <div class="game-stats">
     <p>Moves: <span id="moves">0</span></p>
     <p>Matches: <span id="matches">0</span></p>
   </div>
+  <script src="app.js"></script>
 </body>
 
 </html>
+
+
+<?php 
+// db connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "game_scores";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+
+
+
+?>
